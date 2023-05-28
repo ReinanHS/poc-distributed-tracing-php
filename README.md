@@ -1,8 +1,8 @@
 <div align="center">
-   <img src="https://github.com/ReinanHS/poc-hyperf-observability/raw/main/.github/content/observability-hyperf.png" alt="logo" width="80%">
+   <img src="https://github.com/ReinanHS/poc-opentelemetry-php/assets/28494067/d12f0f12-4473-4cdd-87e6-a2c5c8233061" alt="logo" width="80%">
 </div>
 
-POC Opentelemetry PHP
+POC Distributed Tracing PHP
 =======================================
 
 [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-green)](LICENCE)

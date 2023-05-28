@@ -35,7 +35,7 @@ Esse projeto roda nos seguintes softwares:
 - Git 2.33+
 - Hyperf
 - ZipKin
-- Jaeguer
+- Jaeger
 - Promotheus
 - Grafana
 - MySQL

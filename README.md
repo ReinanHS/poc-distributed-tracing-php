@@ -36,7 +36,7 @@ Esse projeto roda nos seguintes softwares:
 - Hyperf
 - ZipKin
 - Jaeger
-- Promotheus
+- Prometheus
 - Grafana
 - MySQL
 - Redis

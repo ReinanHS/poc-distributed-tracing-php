@@ -1,0 +1,122 @@
+version: '3.7'
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+  mysql_data: {}
+
+networks:
+  back-tier:
+    driver: bridge
+
+services:
+  # Bancos de dados / Cache
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - docker/mysql/mysql-common.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - back-tier
+  redis:
+    image: redis:6.2-alpine
+    networks:
+      - back-tier
+  # Aplicações
+  app-a:
+    extends:
+      file: common-services.yml
+      service: service-a
+    networks:
+      - back-tier
+    ports:
+      - '9501:9501'
+  app-b:
+    extends:
+      file: common-services.yml
+      service: service-b
+    networks:
+      - back-tier
+    ports:
+      - '9502:9501'
+  app-c:
+    extends:
+      file: common-services.yml
+      service: service-c
+    networks:
+      - back-tier
+    ports:
+      - '9503:9501'
+  # Opentelemetry
+  collector:
+    image: otel/opentelemetry-collector-contrib:0.39.0
+    volumes:
+      - './docker/collector/config.yaml:/etc/otel/config.yaml'
+    networks:
+      - back-tier
+    ports:
+      - '4317:4317'
+  # Trace
+  zipkin:
+    image: openzipkin/zipkin-slim
+    networks:
+      - back-tier
+    ports:
+      - '9411:9411'
+    depends_on:
+      - collector
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    networks:
+      - back-tier
+    ports:
+      - "16686:16686"
+    depends_on:
+      - collector
+  # Metric
+  prometheus:
+    image: prom/prometheus:v2.36.2
+    volumes:
+      - './docker/prometheus/:/etc/prometheus/'
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    networks:
+      - back-tier
+    restart: always
+    depends_on:
+      - collector
+  grafana:
+    image: grafana/grafana
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./docker/grafana/config.monitoring
+    networks:
+      - back-tier
+    restart: always
+  k6:
+    container_name: 'k6-app'
+    image: grafana/k6:latest
+    entrypoint: [ "k6" ]
+    command: run /scripts/main.js
+    networks:
+      - back-tier
+    volumes:
+      - ./test/K6:/scripts
+    depends_on:
+      - app-a
+      - app-b
+      - app-c

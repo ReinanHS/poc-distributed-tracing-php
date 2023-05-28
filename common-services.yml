@@ -1,0 +1,43 @@
+x-environment-common: &environment-common
+  ZIPKIN_ENDPOINT_URL: 'http://collector:9412/api/v2/spans'
+  REDIS_HOST: 'redis'
+  DB_HOST: 'mysql'
+  DB_DATABASE: 'poc-db'
+  DB_USERNAME: 'admin'
+  DB_PASSWORD: 'password'
+
+x-service-common: &service-common
+  image: reinanhs/poc-hyperf-observability:latest
+  depends_on:
+    - collector
+    - prometheus
+    - redis
+    - mysql
+
+services:
+  service-a:
+    <<: *service-common
+    container_name: "service-a"
+    environment:
+      APP_NAME: 'service-a'
+      SERVICE_URL: 'service-b'
+      SERVICE_PORT: '9501'
+      SERVICE_ENDPOINT: 'trace/internal-api'
+      <<: *environment-common
+
+  service-b:
+    <<: *service-common
+    container_name: "service-b"
+    environment:
+      APP_NAME: 'service-b'
+      SERVICE_URL: 'service-c'
+      SERVICE_PORT: '9501'
+      SERVICE_ENDPOINT: 'trace/database'
+      <<: *environment-common
+
+  service-c:
+    <<: *service-common
+    container_name: "service-c"
+    environment:
+      APP_NAME: 'service-c'
+      <<: *environment-common

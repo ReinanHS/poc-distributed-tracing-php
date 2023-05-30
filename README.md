@@ -40,6 +40,67 @@ Esse projeto roda nos seguintes softwares:
 - Grafana
 - MySQL
 - Redis
+- Graylog
+
+## Ferramentas de Observabilidade
+
+Selecionei algumas ferramentas que iremos utilizar o decorrer desse repositório para exemplificar o uso da observabilidade dentro do framework do Hyperf.
+
+### Ferramentas de monitoramento de infraestrutura
+
+O monitoramento de infraestrutura é uma prática fundamental para garantir o bom funcionamento de sistemas e serviços. Ao acompanhar de perto o desempenho e o estado da infraestrutura, é possível identificar problemas, otimizar recursos.
+
+#### Prometheus
+
+Uma das principais ferramentas de observabilidade é o Prometheus. Trata-se de um sistema de monitoramento e alerta, capaz de coletar e armazenar métricas sobre a infraestrutura. O Prometheus é altamente escalável e possui uma arquitetura flexível, o que o torna ideal para ambientes distribuídos. Ele permite a coleta de métricas em tempo real, o que possibilita uma visão detalhada do desempenho do sistema. Além disso, o Prometheus oferece recursos avançados, como consultas e alertas personalizados, permitindo uma análise profunda dos dados coletados.
+
+- Acesse a URL http://localhost:9090 para ter acesso de informações que estão disponíveis no Promotheus.
+
+#### Grafana
+
+Outra ferramenta amplamente utilizada é o Grafana. O Grafana é uma plataforma de visualização de dados que se integra perfeitamente com o Prometheus e outras fontes de dados.
+
+Com o Grafana, é possível criar painéis personalizados e intuitivos, exibindo métricas e gráficos em tempo real. Isso facilita a compreensão e a análise dos dados de monitoramento da infraestrutura, possibilitando a detecção rápida de problemas e tendências.
+
+- Acesse a URL http://localhost:3000 para ter acesso de informações que estão disponíveis no Grafana.
+- Utilize o usuário **admin** e a senha **secret** para acessar as informações. 
+- Na dashboard substitua o valor da variável `app_name` por `otel_service_a`
+
+### Ferramentas de rastreamento distribuído
+
+Em sistemas distribuídos complexos, compreender o fluxo das solicitações através de diferentes componentes e serviços pode ser um desafio. É nesse cenário que as ferramentas de rastreamento distribuído desempenham um papel fundamental, permitindo a visibilidade e a compreensão do comportamento do sistema como um todo.
+
+#### Jaeger
+
+Uma das ferramentas mais populares de rastreamento distribuído é o Jaeger. O Jaeger é um sistema de código aberto que facilita a rastreabilidade de solicitações complexas em ambientes distribuídos. Ele fornece uma visão detalhada de cada solicitação à medida que atravessa os diferentes serviços e componentes envolvidos.
+
+- Acesse a URL http://localhost:16686 para ter acesso de informações que estão disponíveis no Jaeguer.
+
+#### Zipkin
+
+Outra ferramenta importante é o Zipkin. O Zipkin é outra plataforma de rastreamento distribuído de código aberto que oferece recursos semelhantes ao Jaeger. Ele permite visualizar o fluxo de solicitações em um sistema distribuído, rastreando o tempo gasto em cada serviço e identificando possíveis gargalos ou problemas de desempenho.
+
+- Acesse a URL http://127.0.0.1:9411 para ter acesso de informações que estão disponíveis no ZipKin.
+
+### Ferramentas de gerenciamento e centralização de logs
+
+Em ambientes de TI complexos, onde diversos sistemas e componentes estão em funcionamento, o gerenciamento e a centralização de logs se tornam essenciais para manter a visibilidade e o controle sobre o funcionamento do sistema como um todo. As ferramentas de gerenciamento de logs ajudam a coletar, armazenar e analisar registros de várias fontes, permitindo uma visão unificada e facilitando a identificação de problemas e anomalias.
+
+#### Graylog
+
+Um ferramenta de destaque é o Graylog, que oferece recursos abrangentes de gerenciamento e centralização de logs. O Graylog permite coletar, armazenar e analisar logs de várias fontes, incluindo aplicativos, servidores e dispositivos de rede. Ele possui uma interface intuitiva, com recursos de pesquisa avançada, filtragem e alertas personalizados.
+
+- Acesse a URL http://localhost:9000 para ter acesso de informações que estão disponíveis no Graylog.
+- Utilize o usuário **admin** e a senha **secret** para acessar as informações.
+- Clicar em System > Inputs
+- Selecionar o tipo de input como GELF TCP
+- Clicar em Launch new input
+- Selecionar o node que vamos utilizar
+- Adicione um título
+- Escolha a porta 12201
+- Salve as informações
+
+Após fazer essas configurações remova os comentários das configurações do log dos serviços no arquivo `common-services.yml`.
 
 ### Changelog
 

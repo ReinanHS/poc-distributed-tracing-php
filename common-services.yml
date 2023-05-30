@@ -13,6 +13,12 @@ x-service-common: &service-common
     - prometheus
     - redis
     - mysql
+    - graylog
+#  logging:
+#    driver: gelf
+#    options:
+#      gelf-address: "tcp://127.0.0.1:12201"
+#      tag: service
 
 services:
   service-a:

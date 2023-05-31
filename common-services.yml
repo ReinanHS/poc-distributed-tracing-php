@@ -13,7 +13,6 @@ x-service-common: &service-common
     - prometheus
     - redis
     - mysql
-    - graylog
 #  logging:
 #    driver: gelf
 #    options:

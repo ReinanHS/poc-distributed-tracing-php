@@ -102,6 +102,12 @@ Um ferramenta de destaque é o Graylog, que oferece recursos abrangentes de gere
 
 Após fazer essas configurações remova os comentários das configurações do log dos serviços no arquivo `common-services.yml`.
 
+Use o comando abaixo para iniciar o serviço:
+
+```shell
+docker compose -f=docker-graylog.yml up
+```
+
 ### Changelog
 
 Por favor, veja [CHANGELOG](CHANGELOG.md) para obter mais informações sobre o que mudou recentemente.

@@ -1,0 +1,53 @@
+version: '3.7'
+
+volumes:
+  mongo_data: { }
+  elasticsearch_data: { }
+  graylog_data: { }
+
+networks:
+  back-tier:
+    driver: bridge
+
+services:
+  # Logs
+  mongo:
+    image: mongo:3
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - back-tier
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.2
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - back-tier
+  graylog:
+    image: graylog/graylog:3.1.0
+    volumes:
+      - graylog_data:/usr/share/graylog/data/journal
+      - ./contentpacks:/usr/share/graylog/data/contentpacks/
+    environment:
+      - TZ=America/Sao_Paulo
+      - GRAYLOG_ROOT_TIMEZONE=America/Sao_Paulo
+      - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+      # Password: admin
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_ELASTICSEARCH_INDEX_PREFIX=graylog
+    depends_on:
+      - elasticsearch
+      - mongo
+    networks:
+      - back-tier
+    ports:
+      # GELF TCP LOG
+      - "12201:12201"
+      # Graylog web interface and REST API
+      - "9000:9000"

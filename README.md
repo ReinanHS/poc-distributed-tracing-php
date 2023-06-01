@@ -57,68 +57,6 @@ cd poc-distributed-tracing-php
 docker compose up
 ```
 
-### Visualizar informações
-
-Veja as etapas necessárias para conseguir visualizar as informações geradas.
-
-#### ZipKin
-
-O Zipkin é uma ferramenta de rastreamento distribuído amplamente utilizada em sistemas distribuídos. Ele permite rastrear e visualizar o fluxo de solicitações entre os diferentes componentes de um sistema, fornecendo informações valiosas para a identificação e solução de problemas de desempenho.
-
-Para visualizar as informações do rastreamento distribuído acesse a URL abaixo:
-
-- Acesse a URL [http://127.0.0.1:9411](http://127.0.0.1:9411) para ter acesso de informações que estão disponíveis no ZipKin.
-- No menu clique no botão "Dependencies"
-- Clique no botão "Run Query"
-
-Essas serão as informações que serão exibidas para você após finalizar as etapas anteriores:
-
-![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/11349e1f-ddc0-4367-8d4a-60a6c52c1ea9)
-
-#### Jaeger
-
-O Jaeger é uma plataforma de rastreamento distribuído desenvolvida para ajudar a monitorar, solucionar problemas e otimizar o desempenho de sistemas distribuídos complexos.
-
-Ele foi projetado para trabalhar em conjunto com o conceito de "rastreamento de solicitações", permitindo acompanhar o fluxo de solicitações em uma arquitetura distribuída e fornecer informações detalhadas sobre o tempo gasto em cada componente envolvido.
-
-Para visualizar as informações do rastreamento distribuído acesse a URL abaixo:
-
-- Acesse a URL [http://localhost:16686](http://localhost:16686) para ter acesso de informações que estão disponíveis no Jaeguer.
-- No menu clique no botão "System Architecture"
-- Clique no botão "DAG"
-
-Essas serão as informações que serão exibidas para você após finalizar as etapas anteriores:
-
-![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/b5af9a93-42a5-4e2f-abf0-e3f90a52d8d1)
-
-#### Grafana
-
-O Grafana é uma plataforma de visualização e monitoramento de código aberto amplamente utilizada para criar painéis interativos e gráficos visuais que exibem dados de métricas e logs.
-
-Com o Grafana, os usuários podem conectar uma variedade de fontes de dados, como Prometheus, InfluxDB, Elasticsearch e muitos outros, para coletar dados e criar visualizações personalizadas. Ele oferece uma ampla gama de opções de painéis e gráficos, permitindo que os usuários criem dashboards informativos e interativos para monitorar o desempenho e a saúde de sistemas, aplicativos e infraestrutura.
-
-- Acesse a URL [http://localhost:3000](http://localhost:3000) para ter acesso de informações que estão disponíveis no Grafana.
-- Utilize o usuário `admin` e a senha `secret` para acessar as informações. 
-- Na dashboard substitua o valor da variável `app_name` por `otel_service_a`
-
-Veja um exemplo das informações que estão disponíveis nesse serviço:
-
-![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/c2c8ab1c-f722-4a7e-908e-99771889de4d)
-
-### Software stack
-
-Esse projeto roda nos seguintes softwares:
-
-- Git 2.33+
-- Hyperf
-- ZipKin
-- Jaeger
-- Prometheus
-- Grafana
-- MySQL
-- Redis
-- Graylog
-
 ## Ferramentas de Observabilidade
 
 Selecionei algumas ferramentas que iremos utilizar o decorrer desse repositório para exemplificar o uso da observabilidade dentro do framework do Hyperf.
@@ -143,6 +81,10 @@ Com o Grafana, é possível criar painéis personalizados e intuitivos, exibindo
 - Utilize o usuário **admin** e a senha **secret** para acessar as informações. 
 - Na dashboard substitua o valor da variável `app_name` por `otel_service_a`
 
+Veja um exemplo das informações que estão disponíveis nesse serviço:
+
+![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/c2c8ab1c-f722-4a7e-908e-99771889de4d)
+
 ### Ferramentas de rastreamento distribuído
 
 Em sistemas distribuídos complexos, compreender o fluxo das solicitações através de diferentes componentes e serviços pode ser um desafio. É nesse cenário que as ferramentas de rastreamento distribuído desempenham um papel fundamental, permitindo a visibilidade e a compreensão do comportamento do sistema como um todo.
@@ -152,12 +94,20 @@ Em sistemas distribuídos complexos, compreender o fluxo das solicitações atra
 Uma das ferramentas mais populares de rastreamento distribuído é o Jaeger. O Jaeger é um sistema de código aberto que facilita a rastreabilidade de solicitações complexas em ambientes distribuídos. Ele fornece uma visão detalhada de cada solicitação à medida que atravessa os diferentes serviços e componentes envolvidos.
 
 - Acesse a URL http://localhost:16686 para ter acesso de informações que estão disponíveis no Jaeguer.
+- No menu clique no botão "System Architecture"
+- Clique no botão "DAG"
 
 #### Zipkin
 
 Outra ferramenta importante é o Zipkin. O Zipkin é outra plataforma de rastreamento distribuído de código aberto que oferece recursos semelhantes ao Jaeger. Ele permite visualizar o fluxo de solicitações em um sistema distribuído, rastreando o tempo gasto em cada serviço e identificando possíveis gargalos ou problemas de desempenho.
 
 - Acesse a URL http://127.0.0.1:9411 para ter acesso de informações que estão disponíveis no ZipKin.
+- No menu clique no botão "**Dependencies**"
+- Clique no botão "**Run Query**"
+
+Essas serão as informações que serão exibidas para você após finalizar as etapas anteriores:
+
+![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/b5af9a93-42a5-4e2f-abf0-e3f90a52d8d1)
 
 ### Ferramentas de gerenciamento e centralização de logs
 
@@ -184,6 +134,20 @@ Use o comando abaixo para iniciar o serviço:
 ```shell
 docker compose -f=docker-graylog.yml up
 ```
+
+### Software stack
+
+Esse projeto roda nos seguintes softwares:
+
+- Git 2.33+
+- Hyperf
+- ZipKin
+- Jaeger
+- Prometheus
+- Grafana
+- MySQL
+- Redis
+- Graylog
 
 ### Changelog
 

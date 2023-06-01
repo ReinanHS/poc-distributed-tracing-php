@@ -97,6 +97,10 @@ Uma das ferramentas mais populares de rastreamento distribuído é o Jaeger. O J
 - No menu clique no botão "System Architecture"
 - Clique no botão "DAG"
 
+Essas serão as informações que serão exibidas para você após finalizar as etapas anteriores:
+
+![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/b5af9a93-42a5-4e2f-abf0-e3f90a52d8d1)
+
 #### Zipkin
 
 Outra ferramenta importante é o Zipkin. O Zipkin é outra plataforma de rastreamento distribuído de código aberto que oferece recursos semelhantes ao Jaeger. Ele permite visualizar o fluxo de solicitações em um sistema distribuído, rastreando o tempo gasto em cada serviço e identificando possíveis gargalos ou problemas de desempenho.
@@ -104,10 +108,6 @@ Outra ferramenta importante é o Zipkin. O Zipkin é outra plataforma de rastrea
 - Acesse a URL http://127.0.0.1:9411 para ter acesso de informações que estão disponíveis no ZipKin.
 - No menu clique no botão "**Dependencies**"
 - Clique no botão "**Run Query**"
-
-Essas serão as informações que serão exibidas para você após finalizar as etapas anteriores:
-
-![image](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/b5af9a93-42a5-4e2f-abf0-e3f90a52d8d1)
 
 ### Ferramentas de gerenciamento e centralização de logs
 

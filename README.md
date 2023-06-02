@@ -28,7 +28,7 @@ Foi desenvolvido um cenário fictício para demonstrar o conceito de rastreament
 
 Podemos observar que o fluxo de informações passa por vários serviços antes de ser concluído. Abaixo, temos um diagrama visual do fluxo:
 
-![Fluxo do microsserviço](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/a278ef26-4049-45f8-9b3b-252869c28b52)
+![Fluxo do microsserviço](https://github.com/ReinanHS/poc-distributed-tracing-php/assets/28494067/9147e99d-444c-4b2f-9f76-3314c14d794a)
 
 ## Configuração do ambiente 
 

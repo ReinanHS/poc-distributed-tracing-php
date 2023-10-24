@@ -118,7 +118,7 @@ Em ambientes de TI complexos, onde diversos sistemas e componentes estão em fun
 Um ferramenta de destaque é o Graylog, que oferece recursos abrangentes de gerenciamento e centralização de logs. O Graylog permite coletar, armazenar e analisar logs de várias fontes, incluindo aplicativos, servidores e dispositivos de rede. Ele possui uma interface intuitiva, com recursos de pesquisa avançada, filtragem e alertas personalizados.
 
 - Acesse a URL http://localhost:9000 para ter acesso de informações que estão disponíveis no Graylog.
-- Utilize o usuário **admin** e a senha **secret** para acessar as informações.
+- Utilize o usuário **admin** e a senha **admin** para acessar as informações.
 - Clicar em System > Inputs
 - Selecionar o tipo de input como GELF TCP
 - Clicar em Launch new input
